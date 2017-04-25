@@ -32,7 +32,10 @@ fullpath_str = fullpath.stdout.decode("utf-8").split("\n")[0]
 #print("fullpath_str =",path_transform(fullpath_str))
 
 temp = subprocess.run(["ls","-dp",fullpath_str],stdout=subprocess.PIPE).stdout.decode("utf-8")
-lastletter = temp[-2]
+try:
+    lastletter = temp[-2]
+except IndexError:
+    sys.exit()
 if lastletter == "/":
     output = subprocess.run(["cmd.exe","/c","\"explorer.exe",path_transform(fullpath_str),"\""],
             stderr=subprocess.PIPE)
