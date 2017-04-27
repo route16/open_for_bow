@@ -49,7 +49,7 @@ else:
             output = subprocess.run([app.app_name, fullpath_str])
             break
     else:
-        output = subprocess.run(["cmd.exe","/c","\"" + path_transform(fullpath_str) + "\""],
+        output = subprocess.Popen(["cmd.exe","/c","\"" + path_transform(fullpath_str) + "\""],
             stderr=subprocess.PIPE)
     if not suppress_stderr:
         print(output.stderr)
