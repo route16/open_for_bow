@@ -37,9 +37,9 @@ try:
 except IndexError:
     sys.exit()
 if lastletter == "/":
-    output = subprocess.run(["cmd.exe","/c","\"explorer.exe",path_transform(fullpath_str),"\""],
-            stderr=subprocess.PIPE)
-    #subprocess.run(["explorer.exe",path_transform(fullpath_str)],stderr=subprocess.PIPE)
+    #output = subprocess.run(["cmd.exe","/c","\"explorer.exe",path_transform(fullpath_str),"\""],
+    #        stderr=subprocess.PIPE)
+    subprocess.run(["explorer.exe",path_transform(fullpath_str)],stderr=subprocess.PIPE)
     if not suppress_stderr:
         print(output.stderr)
 else:
@@ -49,7 +49,7 @@ else:
             output = subprocess.run([app.app_name, fullpath_str])
             break
     else:
-        output = subprocess.Popen(["cmd.exe","/c","\"" + path_transform(fullpath_str) + "\""],
+        output = subprocess.run(["sh","-c","cmd.exe /c \"" + path_transform(fullpath_str) + "\""],
             stderr=subprocess.PIPE)
     if not suppress_stderr:
         print(output.stderr)
